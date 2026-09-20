@@ -2,7 +2,7 @@
 
 ## 用户可见与后台边界
 
-用户可见：当前需要回答的问题、每轮经历提炼与职业包装、方向建议、岗位名称、能力积木、下一次市场动作。
+用户可见：当前需要回答的问题、每轮经历提炼与职业包装、方向建议、岗位名称、能力积木、能力优先的岗位与市场扩展建议、下一阶段职业能力证据积累建议、下一次市场动作。
 
 仅后台：阶段名、经历队列、组织/项目、角色关系、日期范围及其完整状态、事实/解释/假设分类、原始职业语料片段、evidence mapping、证据缺口、JD 全文或摘录、匹配分数、置信度、失败标签、版本号和验收记录。后台字段不得原样复制到对话。
 
@@ -13,7 +13,7 @@
 ```markdown
 # Career Capability Mapper Runtime State
 - run_id: <非身份随机值>
-- phase: target | evidence | jd | mapping | blocks | market_loop
+- phase: target | evidence | jd | mapping | blocks | role_remap | market_expand | evidence_growth | market_loop
 - target_ref:
 - experience_queue: current / covered / parked
 - evidence_refs:
@@ -22,6 +22,9 @@
 - capability_refs:
 - capability_blocks_ref: .capability-blocks-session/capability-blocks.md
 - last_user_visible_output:
+- next_extension_offer: role_remap | market_expand | evidence_growth | none
+- selected_direction_ref:
+- market_scope_ref:
 - next_action:
 - retention: user_managed
 ```
@@ -34,6 +37,7 @@
 - 事实修正：按“用户明确修正 > 用户最新确认 > 用户原始陈述 > 旧 CV > AI 推断”处理冲突，更新所有受影响映射，旧值不作为可恢复历史长期保存。JD 不在事实优先级中。
 - 产物同步：积木的主张、证据链、岗位映射或顺序改变时，同步更新 `capability-blocks.md` 和 `evidence-map.json`，不允许存在无对应 evidence ID 的实质性积木主张。
 - 目标变化：只失效受影响的 JD 样本、需求簇与能力排序。
+- 延伸建议：岗位或市场扩展产生的新 JD 可更新市场映射；尚未发生的积累计划不得写入 evidence units，也不得描述为用户已经拥有的能力。
 - 用户可见输出：不得包含内部否定状态或后台控制词。
 - 外部来源：保存链接、访问日期和必要短摘录，不缓存无关正文。
 

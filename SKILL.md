@@ -1,8 +1,8 @@
 ---
 name: career-capability-mapper
-description: 通过迁移导向访谈、目标市场 JD 调研与证据映射，把职场、校园或项目经历转化为人类与 Agent 可读的能力积木及可追溯的 evidence map。适用于岗位方向尚未完全确定、跨行或非线性经历梳理、求职起点探索；不用于直接撰写完整 CV、自动投递或面试准备。
+description: 通过迁移导向访谈、目标市场 JD 调研与证据映射，把职场、校园或项目经历转化为人类与 Agent 可读的能力积木及可追溯的 evidence map，并在核心交付后按需扩展岗位、市场与职业能力证据积累方向。适用于岗位方向尚未完全确定、跨行或非线性经历梳理、求职起点探索；不用于直接撰写完整 CV、自动投递或面试准备。
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
 ---
 
 # Career Capability Mapper
@@ -33,7 +33,7 @@ metadata:
 
 ## 启动与恢复
 
-先读取 [references/workflow.md](references/workflow.md)；创建或恢复运行态时读取 [references/state-and-privacy.md](references/state-and-privacy.md)。生成或修订能力积木前读取 [references/capability-quality.md](references/capability-quality.md)。首次创建、更新或向下游 Agent 交付 evidence map 时，读取 [references/evidence-handoff.md](references/evidence-handoff.md)。
+先读取 [references/workflow.md](references/workflow.md)；创建或恢复运行态时读取 [references/state-and-privacy.md](references/state-and-privacy.md)。生成或修订能力积木前读取 [references/capability-quality.md](references/capability-quality.md)。首次创建、更新或向下游 Agent 交付 evidence map 时，读取 [references/evidence-handoff.md](references/evidence-handoff.md)。完成核心双产物并准备提出延伸入口，或用户主动要求扩展岗位、市场或能力证据积累方向时，读取 [references/extended-pathways.md](references/extended-pathways.md)。
 
 从最早未完成且仍必要的阶段继续。用户已经提供目标、经历或 JD 时直接吸收，不重复提问；一次只推进当前步骤，不展示整套流程或完整问卷。
 
@@ -103,12 +103,22 @@ metadata:
 
 每轮只建议一个最能减少不确定性的下一步，不输出冗长行动计划。用户可以暂停并在以后恢复。
 
+## 核心交付后的延伸入口
+
+两份核心产物首次同步交付后，主动提供延伸入口，但每轮最多出现一个流程引导类问题，不把多个选项并列成菜单，也不与另一项流程引导问题同时出现。按以下顺序自然推进：
+
+1. 首先只问：`是否需要依据可迁移能力，重新匹配市场上更合适的岗位？`
+2. 完成岗位重映射，或用户明确跳过后，下一轮才问：`是否需要进一步放宽市场范围，寻找国际市场中的匹配方向？`
+3. 完成或跳过市场扩展后，下一轮才问：`是否需要分析如果往建议方向发展，需要持续积累哪方面的职业能力资产？`
+
+用户可直接指定任一延伸流程，不要求从第一项重新开始。延伸分析必须基于已确认积木、evidence map 与当前可核验 JD；不得因为扩大岗位或市场范围而放松事实边界。详细研究方法与用户可见格式见 [references/extended-pathways.md](references/extended-pathways.md)。
+
 ## 完成与文件保留
 
-用户明确表示当前梳理已经完成时，先确保 `capability-blocks.md` 与 `evidence-map.json` 同步并通过普通校验，再把两份文件作为本 Skill 的完整交付提供给用户，同时说明保存位置。本 Skill 不在完成、暂停或后续恢复时自动删除双产物、运行态资料、JD 记录或其他文件。
+用户明确表示当前梳理已经完成时，先确保 `capability-blocks.md` 与 `evidence-map.json` 同步并通过普通校验，再把两份文件作为本 Skill 的完整核心交付提供给用户，同时说明保存位置。除非用户明确要求到此结束，同一轮结尾只提出第一项尚未处理的延伸入口。本 Skill 不在完成、暂停或后续恢复时自动删除双产物、运行态资料、JD 记录或其他文件。
 
 用户提出清理需求时，只说明本 Skill 创建的文件和目录位置，并由用户自行决定、执行和确认删除；Agent 不代替用户删除。平台对话历史、用户保存的副本和第三方站点数据同样由对应平台或用户管理。
 
 ## 边界
 
-不自动生成职业主线、完整 CV、逐 JD 改写、求职招呼语、投递操作或面试准备。用户明确要求这些交付时，先确保两份核心产物同步，再运行 `scripts/validate_evidence_map.py --handoff <evidence-map.json>`；通过后将它们与用户旧 CV、当次目标 JD 一起交给相应流程。没有旧 CV 时可使用用户另行确认的身份与时间线资料；姓名、联系方式等个人资料不反向复制进 evidence map，但每段被能力积木引用的经历必须在 JSON 中具备可用的组织/项目、角色关系和日期范围。
+不自动生成完整 CV、逐 JD 改写、求职招呼语、投递操作或面试准备。用户明确要求这些交付时，先确保两份核心产物同步，再运行 `scripts/validate_evidence_map.py --handoff <evidence-map.json>`；通过后将它们与用户旧 CV、当次目标 JD 一起交给相应流程。没有旧 CV 时可使用用户另行确认的身份与时间线资料；姓名、联系方式等个人资料不反向复制进 evidence map，但每段被能力积木引用的经历必须在 JSON 中具备可用的组织/项目、角色关系和日期范围。
